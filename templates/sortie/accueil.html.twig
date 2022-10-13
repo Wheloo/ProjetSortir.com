@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container pt-4">
+        <div id="filtration" onmouseover="couleur()" class="reveal- row col-md-8 mt-5 offset-md-2 pt-2 pb-3">
+            <h4>Trouvez des sorties selon vos critères</h4>
+                <div class="col-md-12">
+                    {{ form_start(form) }}
+                        {{ form_row(form.campus) }}
+                        {{ form_row(form.search) }}
+                        {{ form_row(form.dateDebut) }}
+                        {{ form_row(form.dateFin) }}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form_row(form.organisateur) }}
+                    {{ form_row(form.inscrit) }}
+                    {{ form_row(form.non_inscrit) }}
+                    {{ form_row(form.passees) }}
+                </div>
+                <div class="d-flex col-md-5 justify-content-center align-items-center">
+                    <button type="submit" class="btn btn-secondary btn-lg py-4 px-5">Rechercher</button>
+                    {{ form_end(form) }}
+                </div>
+        </div>
+    </div>
+
+    <div class="reveal-2 container mt-3 overflow-auto" style="height: 300px;">
+        <table class="table table-responsive table-striped table-bordered bg-light">
+            <thead class="bg-primary text-white">
+                <tr class="text-center">
+                    <th scope="col">Nom de la sortie</th>
+                    <th scope="col">Date de la sortie</th>
+                    <th scope="col">Clôture</th>
+                    <th scope="col">inscrits/place</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Inscrit</th>
+                    <th scope="col">Organisateur</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for sortie in sorties%}
+                    {% if sortie.etat.libelle != 'Annulee' %}
+                        <tr>
+                        <td>{{ sortie.nom }}</td>
+                        <td class="text-center">{{ sortie.dateHeureDebut.format("d/m/Y H:m")}}</td>
+                        <td class="text-center">{{ sortie.dateLimiteInscription.format("d/m/Y") }}</td>
+                        <td class="text-center">{{ sortie.participants|length}} / {{ sortie.nbInscriptionsMax }}</td>
+                        <td class="text-center">{{ sortie.etat.libelle }}</td>
+                        {% if sortie.participants.contains(app.user)%}
+                            <td class="text-center"> X </td>
+                        {% else %}
+                            <td class="text-center"> </td>
+                        {% endif %}
+                            <td class="text-center"><a href="{{ path('app_afficher_profil', {'idUtilisateur': sortie.organisateur.id}) }}">{{ sortie.organisateur.nom }}</a></td>
+                        {% if app.user == sortie.organisateur and sortie.etat.libelle == 'Creee'%}
+                            <td class="text-center"><a href="{{ path('app_modif', {'sortieID': sortie.id}) }}">Modifier</a> / <a href="{{ path('app_publier', {'sortieID': sortie.id} ) }}">Publier</a> </td>
+                        {% elseif app.user == sortie.organisateur and sortie.etat.libelle == 'Ouvert' %}
+                            <td class="text-center"><a href="{{ path('app_afficher_sortie', {'sortieID': sortie.id}) }}">Afficher</a> / <a href="{{ path('app_annuler', {'sortieID': sortie.id}) }}">Annuler</a> </td>
+                        {% elseif (sortie.participants.contains(app.user)) %}
+                            <td class="text-center"> <a href="{{ path('app_afficher_sortie', {'sortieID': sortie.id}) }}">afficher </a> / <a href="{{ path('app_action', {'sortieID': sortie.id, 'action': 0} ) }}">Se désister</a> </td>
+                        {% elseif not(sortie.participants.contains(app.user)) and sortie.etat.libelle == 'Ouvert' and sortie.participants|length < sortie.nbInscriptionsMax%}
+                            <td class="text-center"> <a href="{{ path('app_afficher_sortie', {'sortieID': sortie.id}) }}">afficher </a> / <a href="{{ path('app_action', {'sortieID': sortie.id, 'action': 1} ) }}">S'inscrire</a> </td>
+                        {% else %}
+                            <td class="text-center"><a href="{{ path('app_afficher_sortie', {'sortieID': sortie.id}) }}">Afficher</a> </td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row w-50 mx-auto">
+        <a href="{{ path('app_creation') }}" title="Creation sortie" class="btn btn-primary btn-lg mb-3">Créez votre sortie sur-mesure</a>
+    </div>
+
+{%  endblock %}

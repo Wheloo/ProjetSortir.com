@@ -1,0 +1,250 @@
+#filtration, #creation, #profil, #login, #afficherSortie, #afficher {
+    background: #EEEEEEAA;
+    border : 2px solid #FFF;
+    border-radius: 8px;
+}
+
+#filtration button {
+    background-color: #5eb5e0;
+    font-size: 22px;
+}
+
+#filtration button:hover {
+    background-color: darkgreen;
+}
+
+#creation label, #creation span {
+    font-weight: bold;
+}
+
+#titre {
+    font-family: Calibri, sans-serif ;
+    font-size: 5em;
+    text-shadow: 0 0 12px white;
+    -webkit-text-stroke: 1px white;
+}
+
+#listeParticipants {
+    font-family: Calibri, sans-serif ;
+    font-size: 2em;
+    text-shadow: 0 0 12px white;
+}
+
+#fondPrincipal {
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0.6),
+            rgba(255, 255, 255, 0.6)
+    ), url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Hellfest_2022_depuis_la_grande_roue_-_20220625_193649.jpg/1920px-Hellfest_2022_depuis_la_grande_roue_-_20220625_193649.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar .menuHamburger {
+    position: absolute;
+    right: 50px;
+    width: 35px;
+}
+
+.anim-navbar {
+    background-color: red;
+    color: #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    min-width: 100%;
+    min-height: 40px;
+    transition: all 0.3s ease-out;
+    background: darkcyan;
+}
+
+
+[class*="reveal-"] {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.reveal-2 {
+    transition: 3s;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: 2s cubic-bezier(.5,0,0,1);
+}
+
+
+.footer {
+    background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("http://andreeabunget.co.uk/Img/footer.jpg");
+    background-size: cover;
+    height: 430px;
+}
+
+.first {
+    margin-top: 40px;
+    color: rgb(206,206,206);
+    font-family: 'Poppins', sans-serif;
+}
+
+.first h4 {
+    letter-spacing: 3px;
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    color: #fff;
+    padding-bottom: 0.5em;
+}
+
+.first h4::after {
+    content: '';
+    background: darkcyan;
+    width: 20%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.first p {
+    font-size: 14px;
+}
+
+.second {
+    margin-top: 40px;
+    color: rgb(206,206,206);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.second2 {
+    margin-top: 40px;
+    margin-bottom: 50px;
+    color: rgb(206,206,206);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.second h4 {
+    letter-spacing: 3px;
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    color: #fff;
+    padding-bottom: 0.5em;
+}
+
+.second h4::after {
+    content: '';
+    background: darkcyan;
+    width: 20%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+}
+
+
+.second li {
+    list-style: none;
+    padding-bottom: 30px;
+}
+
+.second a, .second2 a {
+    color: rgb(206, 206, 206);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.second a:hover, .second2 a:hover {
+    color: #fff;
+    transition: 0.2s;
+    text-shadow: 1px 1px 20px rgba(0,0,0,1);
+    text-decoration: none
+
+}
+
+.third {
+    margin-top: 40px;
+    color: rgb(206,206,206);
+    font-family: 'Poppins', sans-serif;
+    text-align: right;
+}
+
+.third h4 {
+    letter-spacing: 3px;
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    color: #fff;
+    padding-bottom: 0.5em;
+}
+
+.third h4::after {
+    content: '';
+    background: darkcyan;
+    width: 20%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 80%;
+}
+
+.third li {
+    list-style: none;
+    padding-bottom: 15px;
+}
+
+.third a {
+    color: rgb(206, 206, 206);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.third a:hover {
+    color: #fff;
+    transition: 0.2s;
+    text-shadow: 1px 1px 20px rgba(0,0,0,1);
+}
+
+
+@media screen and (max-width:1000px) {
+    .first {
+        text-align: center;
+    }
+
+    .first h4::after {
+        left: 40%;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .third {
+        text-align: center;
+    }
+
+    .third h4::after {
+        left: 40% !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

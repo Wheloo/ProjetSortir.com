@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-3 mx-auto">
+    <div class="row">
+        <h4>Annuler une sortie</h4>
+        <div class="col-md-6 align-self-start">
+            <form>
+                <label for="name">Nom de la sortie: </label>
+                <p>{{ sortie.sortie.nom }} </p>
+                <label for="date">Date de la sortie: </label>
+                <p>{{ sortie.sortie.dateHeureDebut|date("m/d/Y") }} </p>
+                <label for="campus">Campus : </label>
+                <p>{{ sortie.sortie.campusOrganisateur.nom }} </p>
+                <label for="lieu"> Lieu : </label>
+                <p>{{ sortie.sortie.lieu.nom }} </p>
+            </form>
+
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

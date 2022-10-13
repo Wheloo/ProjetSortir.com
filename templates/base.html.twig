@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Sortir avec l'ENI{% endblock %}</title>
+        <link rel="icon" href="https://www.eni-training.com/connect/styles/default/images/favicon.ico">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+        <script type="text/javascript" src="{{ asset('scripts/main.js') }}" defer></script>
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+
+    <body id="fondPrincipal">
+        <header class="flex mb-3">
+            {%if is_granted('ROLE_USER') %}
+                <nav class="navbar navbar-expand navbar-dark">
+                    <!-- Container wrapper -->
+                    <div class="container-fluid">
+                        <!-- Collapsible wrapper -->
+                        <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+                            <a class="navbar-brand" href="{{ path('app_sortie') }}">
+                                <img src="https://www.eni-training.com/connect/styles/default/images/favicon.ico" width="30" height="30" class="d-inline-block align-top mx-2" alt="">
+                                SortiENI<span class="d-none d-lg-inline"> : Votre organisateur de sorties entre étudiants de l'ENI !</span>
+                            </a>
+                            <!-- Left links -->
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <li class="nav-item">
+                                        <a href="" class="nav-link">Ville</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="" class="nav-link">Campus</a>
+                                    </li>
+                                {% endif %}
+                                <li class="nav-item"><a href="{{ path('app_sortie') }}" class="nav-link">Accueil</a></li>
+                                <li class="nav-item"><a href="{{ path('app_gerer_profil', {id: app.user.id}) }}" class="nav-link">Mon Profil</a></li>
+                                <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link">Se deconnecter</a></li>
+                            </ul>
+                            <!-- Left links -->
+                        </div>
+                        <!-- Collapsible wrapper -->
+                        <img src="{{ asset('images/menu-btn.png') }}" alt="menu" class="menuHamburger d-block d-lg-none">
+                    </div>
+                    <!-- Container wrapper -->
+                </nav>
+            {% endif %}
+        </header>
+
+        {% for label, messages in app.flashes(['success','warning']) %}
+            {% for message in messages %}
+                <div class="alert d-flex align-text-center mx-3 alert-{{ label }}">
+                    {{ message }}
+                    <button type="button" class="btn-close me-2 ms-auto" aria-label="Close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+
+    {%if is_granted('ROLE_USER') %}
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <div class="first">
+                        <h4>Mes Skills</h4>
+                        <p>Analyse</p>
+                        <p>Résolution de problèmes</p>
+                        <p>Design Thinking</p>
+                        <p>Orienté objet</p>
+                        <p>Multi-tâche</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="second">
+                        <h4>Naviguer</h4>
+                        <ul>
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Mon Profil</a></li>
+                            <li><a href="#">A Propos</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="third">
+                        <h4> Contact</h4>
+                        <ul>
+                            <li>William GROUSSARD</li>
+                            <li>soraw49@gmail.com</li>
+                            <li>Angers, FR </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sozial d-flex d-inline justify-content-center">
+            <a href="https://www.linkedin.com/feed/"><img class="logo mx-5" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/online_social_media_facebook-128.png" width="50" height="50" alt=""></a>
+            <img class="logo mx-5" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/twitter_online_social_media-128.png" width="50" height="50" alt="">
+            <img class="logo mx-5" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/instagram_online_social_media_photo-128.png" width="50" height="50" alt="">
+            <img class="logo mx-5" src="https://cdn2.iconfinder.com/data/icons/black-white-social-media/32/online_social_media_google_plus-128.png" width="50" height="50" alt="">
+        </div>
+    </footer>
+    {% endif %}
+</html>

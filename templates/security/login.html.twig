@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <video id="background-video" autoplay loop muted style="height: 100vh; width: 100vw; object-fit: cover; position: fixed; left: 0; right: 0; top: 0; bottom: 0; z-index: -1;">
+        <source src="{{ asset('videos/videoSortiENI.mp4') }}" type="video/mp4">
+    </video>
+
+{# Message d'erreur suite saisi mot de passe erroné #}
+    <div class="d-flex flex-column col-12 min-vh-100 justify-content-center align-items-center ">
+
+    <h2 id="titre" class="reveal- mb-5" >Tout commence ici !</h2>
+
+    <form class="col-lg-4 col-10 text-center" method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <div id="login" class="reveal- col-12 my-3 py-3 px-5">
+                <label for="inputIdentifiant" class="mb-2">Identifiant :</label>
+                <input type="text" value="{{ last_username }}" name="identifiant" id="inputIdentifiant" class="form-control mb-2" autocomplete="on" required autofocus>
+                <label for="inputPassword" class="mb-2">Mot de passe :</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}">
+
+                <div class="checkbox mt-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me" checked/>
+                        Se souvenir de moi
+                    </label>
+                </div>
+
+            </div>
+
+            <button class="reveal- btn btn-lg btn-primary btn-block" type="submit">
+                Connexion
+            </button>
+
+        </form>
+    </div>
+
+{% endblock %}

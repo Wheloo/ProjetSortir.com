@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Afficher Profil{% endblock %}
+
+{% block body %}
+
+<div class="reveal- container-fluid pt-5">
+    <div id="afficher" class="row col-md-8 offset-md-2 justify-content-center">
+        <h1 class="h3 mb-3 mt-2 text-center">{{ participant.pseudo }}</h1>
+            <div class="col-2 mb-4">
+                <label for="prenom" class="mb-3 fw-bold">Prenom :</label><br>
+                <label for="nom" class="mb-3 fw-bold">Nom :</label><br>
+                <label for="telephone" class="mb-3 fw-bold">Telephone :</label><br>
+                <label for="email" class="mb-3 fw-bold">Email :</label><br>
+                <label for="campus" class="mb-2 fw-bold">Campus :</label>
+            </div>
+
+            <div class="col-3 mb-4">
+                <p>{{ participant.prenom }}</p>
+                <p>{{ participant.nom }}</p>
+                <p>{{ participant.telephone }}</p>
+                <p>{{ participant.email }}</p>
+                <p>{{ participant.campus.nom }}</p>
+            </div>
+
+    </div>
+
+
+    <div class="reveal- row w-50 mx-auto mt-3">
+        <a class="btn btn-primary btn-lg mb-3" href="{{ path('app_sortie') }}">Retour</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
